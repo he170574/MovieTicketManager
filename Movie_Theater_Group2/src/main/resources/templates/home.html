@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Netflex</title>
+    <!-- Required meta tags -->
+    <th:block th:replace="~{common/head :: headFragment}"></th:block>
+    <!-- Inject CSS -->
+    <link rel="stylesheet" href="/style/common.css">
+    <link rel="stylesheet" href="/style/home.css">
+    <style>
+        .carousel-item {
+            position: relative;
+            width: 100%;
+            height: 500px;
+        }
+        .carousel-item img,
+        .carousel-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .carousel-item video {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .overlay-text {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            font-size: 24px;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 5px;
+            max-width: 33%;
+        }
+        .overlay-text h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+        .overlay-text p {
+            margin: 10px 0;
+            font-size: 18px;
+        }
+        .overlay-text .button {
+            display: inline-block;
+            background-color: #ff0000;
+            color: #ffffff;
+            padding: 8px 8px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+        .modal-overlay-image {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            position: relative;
+        }
+        .modal-header-overlay {
+            position: relative;
+            text-align: center;
+            color: white;
+            background-color: black;
+        }
+        .modal-header-overlay img {
+            width: 100%;
+            opacity: 1;
+        }
+        .modal-content{
+            margin-left: -35px;
+            width: 120%;
+        }
+        .modal-body {
+            background-color: black;
+            color: white;
+        }
+        .btn-dat-ve {
+            display: inline-block;
+            background-color: #ff0000;
+            color: #ffffff;
+            padding: 8px 8px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+<div th:replace="~{common/header :: headerFragment}"></div>
+<main>
+    <div id="carouselExampleIndicators" class="carousel slide master-slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="https://res.cloudinary.com/de6o7wax8/video/upload/v1716835484/kong2_-_Made_with_Clipchamp_j7hblb.mp4" alt="Movie Poster">
+                <video src="https://res.cloudinary.com/de6o7wax8/video/upload/v1716835484/kong2_-_Made_with_Clipchamp_j7hblb.mp4" muted></video>
+
+                <div class="overlay-text" id="overlay-text">
+                    <h1>Godzilla x Kong: The New Empire</h1>
+                    <a href="#" class="button" data-toggle="modal" data-target="#infoModal">Thông tin khác</a>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="list-current-movie bg-dark">
+        <div class="container">
+            <div class="row">
+                <h2 class="text-center rounded mt-3 py-2" style="color: white;">
+                    Movies now playing
+                </h2>
+            </div>
+            <div class="row flex-wrap" id="movie-items">
+                <div class="col-xl-3 col-lg-4 col-6 p-3">
+                    <div class="card border-dark rounded bg-dark" style="width: 100%;">
+                        <img src="/img/Movie/product_1.jpg" class="rounded bg-dark movie-small-img" style="width: 100%;"
+                             alt="">
+                        <div class="card-body bg-dark text-light px-0">
+                            <h3 class="card-title fw-bold movie-name">À Há MAN</h3>
+                            <p class="card-text pt-2" style="font-size: .8rem;">
+                                Type:
+                                <span class="fw-bold movie-type">Hài Viễn Tưởng</span>
+                            </p>
+                            <div class="pb-3 d-flex flex-wrap movie-attribute">
+                                <button type="button" class="btn btn-danger me-2 fw-bold">18+</button>
+                                <button type="button" class="btn btn-success me-2 fw-bold">2D</button>
+                                <button type="button"
+                                        class="btn btn-outline-warning me-2 fw-bold">Description
+                                </button>
+                            </div>
+                            <a class="button-63 rounded fw-bold text-light w-75 but-ticket" role="button">Buy Ticket</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-4 col-6 p-3">
+                    <div class="card border-dark rounded bg-dark" style="width: 100%;">
+                        <img src="/img/Movie/product_1.jpg" class="rounded bg-dark movie-small-img" style="width: 100%;"
+                             alt="">
+                        <div class="card-body bg-dark text-light px-0">
+                            <h3 class="card-title fw-bold movie-name">À Há MAN</h3>
+                            <p class="card-text pt-2" style="font-size: .8rem;">
+                                Type:
+                                <span class="fw-bold movie-type">Hài Viễn Tưởng</span>
+                            </p>
+                            <div class="pb-3 d-flex flex-wrap movie-attribute">
+                                <button type="button" class="btn btn-danger me-2 fw-bold">18+</button>
+                                <button type="button" class="btn btn-success me-2 fw-bold">2D</button>
+                                <button type="button"
+                                        class="btn btn-outline-warning me-2 fw-bold">Description
+                                </button>
+                            </div>
+                            <a class="button-63 rounded fw-bold text-light w-75 but-ticket" role="button">Buy Ticket</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Modal -->
+<div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header-overlay">
+                <img src="/img/godzilla-1.webp" alt="Overlay Image" class="modal-overlay-image">
+            </div>
+            <div class="modal-body">
+                <p>2024 | 120 phút</p>
+                <p>Godzilla And Kong</p>
+                <p>Godzilla và King Kong đã chính thức tái xuất màn bạc với Godzilla x Kong:
+                    The New Empire - siêu bom tấn mới nhất đến từ vũ trụ điện ảnh quái vật
+                    (Monsterverse) của Legendary Pictures và Warner Bros. Lần này, bộ đôi quái thú
+                    đình đám phải đối mặt với một kẻ thù hoàn toàn mới, một con vượn khổng lồ với
+                    tên gọi Scar King (Thẹo Vương), kẻ vẫn luôn ôm tham vọng thống trị Trái Đất.</p>
+                <a href="#" class="btn-dat-ve">Đặt Vé Ngay!</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<div class="modal modal-dialog-scrollable fade" id="select-movie" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content" style=" font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+            <div class="modal-header d-flex justify-content-center header-login bg-dark p-3"
+                 style="border-top-right-radius: 6px;border-top-left-radius: 6px;">
+                <img src="/img/logo_img.png" style="width: 150px;" alt="">
+            </div>
+
+            <div class="modal-body body-login p-4 d-flex flex-column  content-detail" >
+                <div class="row ">
+                    <div class="px-4 mb-3 col-3">
+                        <div class="d-flex justify-content-between my-2 flex-column align-items-center">
+                            <img id="movie-image" src="" style="width: 90%"/>
+                        </div>
+                    </div>
+                    <div class="px-4 mb-3 col-9">
+                        <span class="fw-bold mt-3 text-danger rounded h1" id="movie-name" style="background-color: rgba(255, 255, 255, 0.5)"></span>
+                        <p class="fw-bold mt-3 text-danger rounded h1" id="duration" style="background-color: rgba(255, 255, 255, 0.5)"></p>
+                        <p class="fw-bold mt-3 text-danger rounded h1" id="actor" style="background-color: rgba(255, 255, 255, 0.5)"></p>
+                        <p class="fw-bold mt-3 text-danger rounded h1" id="director" style="background-color: rgba(255, 255, 255, 0.5)"></p>
+                        <h4 class="fw-bold mt-2 text-danger-emphasis rounded"  id="movie-content" style="background-color: rgba(255, 255, 255, 0.5)"></h4>
+                        <a class="btn btn-success mt-5" href="" id="buy-ticket">Buy Ticket</a>
+
+                    </div>
+                </div>
+
+                <div class="px-3 mb-3 row">
+                    <iframe id="trailer" class="col-12" width="560" height="315" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<div th:replace="~{common/footer :: footerFragment}"></div>
+<!-- Bootstrap JavaScript Libraries -->
+<th:block th:replace="~{common/scriptFile :: scriptFragment}"></th:block>
+<!-- Inject js-->
+<script src="/js/common_customer_page.js"></script>
+<script src="/js/home.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const video = document.querySelector('.carousel-item video');
+        const poster = document.querySelector('.carousel-item img');
+        const overlayText = document.getElementById('overlay-text');
+
+        function checkVideoVisibility() {
+            const rect = video.getBoundingClientRect();
+            const viewHeight = Math.max(document.documentElement.clientHeight, window.innerHeight);
+            if (!(rect.bottom < 0 || rect.top - viewHeight >= 0)) {
+                video.play();
+                poster.style.display = 'none';
+                video.style.display = 'block';
+                overlayText.style.display = 'block';
+
+            } else {
+                video.pause();
+                video.currentTime = 0;
+                poster.style.display = 'block';
+                video.style.display = 'none';
+                overlayText.style.display = 'none';
+            }
+        }
+
+        // Tự động chạy video khi trang được tải
+        checkVideoVisibility();
+
+        window.addEventListener('scroll', checkVideoVisibility);
+        window.addEventListener('resize', checkVideoVisibility);
+
+        // Add the loop attribute to the video
+        video.setAttribute('loop', '');
+
+    });
+</script>
+</body>
+
+</html>

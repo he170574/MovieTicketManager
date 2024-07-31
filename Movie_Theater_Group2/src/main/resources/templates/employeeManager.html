@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Employee Manager</title>
+    <!-- Required meta tags -->
+    <th:block th:replace="~{common/head :: headFragment}"></th:block>
+
+    <!--  Inject CSS -->
+    <link rel="stylesheet" href="/style/common_manager.css">
+    <link rel="stylesheet" href="/style/admin.css">
+</head>
+
+<body>
+<div class="container-custom">
+    <div th:replace="~{common/sideBar :: sideBarFragment }"></div>
+    <div class="tab-content">
+        <div class="header">
+            <div class="d-flex align-items-center">
+                <div class="fs-3">Employee Manager</div>
+            </div>
+        </div>
+
+        <div class="main-content container-fluid pt-5">
+            <div class="d-flex justify-content-between flex-wrap">
+                <div class="d-flex align-items-center m-1">
+                    <span class="d-flex align-items-center fw-bold me-2">Filter</span>
+                    <select class="form-select ps-3 w-auto me-2" id="rowLimit">
+                        <option selected disabled>Row Limit</option>
+                        <option value="5">5 Rows</option>
+                        <option value="10">10 Rows (Default)</option>
+                        <option value="20">20 Rows</option>
+                    </select>
+
+                    <select onchange="onFilterStatus(this)" class="form-select ps-3 w-auto me-2" id="statusFilter">
+                        <option selected disabled>Status</option>
+                        <option value="">All (Defaul)</option>
+                        <option value="0">ACTIVE</option>
+                        <option value="1">INACTIVE</option>
+                    </select>
+                    <select class="form-select ps-3 w-auto me-2" id="roleSelect">
+                        <option selected disabled>Role</option>
+                        <option value="ROLE_EMPLOYEE,ROLE_ADMIN">Employee+Admin (Default)</option>
+                        <option value="ROLE_EMPLOYEE">Employee</option>
+                        <option value="ROLE_ADMIN">Admin</option>
+                    </select>
+                    <div onclick="onOpenAddEmployeeForm()" class="btn btn-dark text-nowrap" id="addEmployeeButton" data-id="1" data-bs-target="#create-account-modal" data-bs-toggle="modal">
+                        <i class="bi bi-plus-circle"></i>
+                        <span>Add</span>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center m-1">
+                    <form class="d-flex justify-content-end" role="search">
+                        <button class="btn btn-dark me-1" type="button" id="search">
+                            <i class="bi bi-search"></i>
+                        </button>
+                        <input class="form-control border-dark" type="search" aria-label="Search" id="search-value" placeholder="Enter Employee Name...">
+                    </form>
+                </div>
+            </div>
+            <!-- Employee Table -->
+            <div class="mb-3">
+                <div style="overflow-x: scroll">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th></th>
+                            <th>Username</th>
+                            <th>Full Name</th>
+                            <th>Date of birth</th>
+                            <th>Gender</th>
+                            <th>Email</th>
+                            <th>Phone number</th>
+                            <th>Address</th>
+                            <th>Register date</th>
+                            <th>Role</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+
+                        <tbody id="table-data">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- Employee Table END -->
+            <div class="d-flex justify-content-end">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <li class="page-item"><span class="page-link">Previous</span></li>
+                        <li class="page-item"><span class="page-link active">1</span></li>
+                        <li class="page-item"><span class="page-link">Next</span></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="create-account-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-body body-login p-4">
+                <div class="px-5 mb-3">
+                    <div class="d-flex justify-content-center my-2">
+                        <h3 class="fw-bold" id="modal-title">Create New Employee</h3>
+                    </div>
+                </div>
+                <form id="createEmployeeForm">
+                    <div class="row mb-3">
+                        <div class="form-group col-6">
+                            <label class="fw-semibold form-label">Username</label>
+                            <input type="text" class="form-control border border-dark-subtle" name="username">
+                            <span class="form-message form-text text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+
+                        <div class="form-group col-6">
+                            <label class="fw-semibold form-label">Email</label>
+                            <input type="email" class="form-control border border-dark-subtle" name="email">
+                            <span class="form-message form-text text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="form-group col-6">
+                            <label class="fw-semibold form-label">Full name</label>
+                            <input type="text" class="form-control border border-dark-subtle" name="fullName">
+                            <span class="form-message form-text text-danger"></span>
+                        </div>
+                        <div class="form-group col-6">
+                            <label class="fw-semibold form-label">Date of birth</label>
+                            <input type="date" class="form-control border border-dark-subtle" name="dateOfBirth">
+                            <span class="form-message form-text text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <div class="fw-semibold">Gender</div>
+                            <div class="mt-2">
+                                <div class="form-check d-inline-block me-3">
+                                    <input class="form-check-input" type="radio" name="gender" checked value="Male">
+                                    <label class="form-check-label">
+                                        Male
+                                    </label>
+                                </div>
+                                <div class="form-check d-inline-block">
+                                    <input class="form-check-input" type="radio" name="gender" value="Female">
+                                    <label class="form-check-label">
+                                        Female
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-4 col-6">
+                            <label class="form-label">Role</label>
+                            <select class="form-select" name="role">
+                                <option value="ROLE_EMPLOYEE">EMPLOYEE</option>
+                                <option value="ROLE_ADMIN">ADMIN</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="form-group col-6">
+                            <label class="fw-semibold form-label">Address</label>
+                            <input type="text" class="form-control border border-dark-subtle" name="address">
+                            <span class="form-message form-text text-danger"></span>
+                        </div>
+                        <div class="form-group col-6">
+                            <label class="fw-semibold form-label">Phone number</label>
+                            <input type="text" class="form-control border border-dark-subtle" name="phoneNumber">
+                            <span class="form-message form-text text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="form-group col-6">
+                            <label class="fw-semibold form-label">Upload Avatar</label>
+                            <input type="file" class="form-control border border-dark-subtle" name="imgFile">
+                        </div>
+                        <div class="form-group col-6 text-center">
+                            <img src="/img/user_img_default.png" alt="Employee_Default_Image" class="image-preview rounded-circle" style="width: 100px; height: 100px; object-fit: cover;"/>
+                        </div>
+                    </div>
+                    <button onclick="onSubmitCreateEmployee()" type="button" class="btn btn-dark fw-semibold" id="submit-create-form">
+                        Create
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="edit-account-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-body body-login p-4">
+                <div class="px-5 mb-3">
+                    <div class="d-flex justify-content-center my-2">
+                        <h3 class="fw-bold modal-title">Edit Employee</h3>
+                    </div>
+                </div>
+                <form id="editEmployeeForm">
+                    <input hidden="hidden" type="text" name="accountId">
+                    <div class="row mb-3">
+                        <div class="form-group col-6">
+                            <label class="fw-semibold form-label">Username</label>
+                            <input disabled type="text" class="form-control border border-dark-subtle" name="username">
+                            <span class="form-message form-text text-danger"></span>
+                        </div>
+                        <div class="form-group col-6">
+                            <label class="fw-semibold form-label">Email</label>
+                            <input disabled type="email" class="form-control border border-dark-subtle" name="email">
+                            <span class="form-message form-text text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="form-group col-6">
+                            <label class="fw-semibold form-label">Full name</label>
+                            <input type="text" class="form-control border border-dark-subtle" name="fullName">
+                            <span class="form-message form-text text-danger"></span>
+                        </div>
+                        <div class="form-group col-6">
+                            <label class="fw-semibold form-label">Date of birth</label>
+                            <input type="date" class="form-control border border-dark-subtle" name="dateOfBirth">
+                            <span class="form-message form-text text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <div class="fw-semibold">Gender</div>
+                            <div class="mt-2">
+                                <div class="form-check d-inline-block me-3">
+                                    <input class="form-check-input" type="radio" name="gender" checked value="Male">
+                                    <label class="form-check-label">
+                                        Male
+                                    </label>
+                                </div>
+                                <div class="form-check d-inline-block">
+                                    <input class="form-check-input" type="radio" name="gender" value="Female">
+                                    <label class="form-check-label">
+                                        Female
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-4 col-6">
+                            <label class="form-label">Role</label>
+                            <select class="form-select" name="role">
+                                <option value="ROLE_MEMBER" id="ROLE_MEMBER" selected>MEMBER</option>
+                                <option value="ROLE_EMPLOYEE" id="ROLE_EMPLOYEE">EMPLOYEE</option>
+                                <option value="ROLE_ADMIN" id="ROLE_ADMIN">ADMIN</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="form-group col-6">
+                            <label class="fw-semibold form-label">Address</label>
+                            <input type="text" class="form-control border border-dark-subtle" name="address">
+                            <span class="form-message form-text text-danger"></span>
+                        </div>
+                        <div class="form-group col-6">
+                            <label class="fw-semibold form-label">Phone number</label>
+                            <input type="text" class="form-control border border-dark-subtle" name="phoneNumber">
+                            <span class="form-message form-text text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="form-group col-6">
+                            <label class="fw-semibold form-label">Upload Avatar</label>
+                            <input type="text" hidden="hidden" name="image">
+                            <input accept="image/png, image/jpeg" type="file" class="form-control border border-dark-subtle" name="imgFile">
+                        </div>
+                        <div class="form-group col-6 text-center">
+                            <img src="/img/user_img_default.png" alt="Employee_Default_Image" class="image-preview rounded-circle" style="width: 100px; height: 100px; object-fit: cover;"/>
+                        </div>
+                    </div>
+                    <button onclick="onSubmitEditEmployeeForm()" type="button" class="btn btn-dark fw-semibold" id="submit-edit-form">
+                        Update
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Bootstrap JavaScript Libraries -->
+<th:block th:replace="~{common/scriptFile :: scriptFragment}"></th:block>
+<!-- Inject js-->
+<script src="/js/common_get_account.js"></script>
+<script src="/js/addressConfig.js"></script>
+<!-- Inject js-->
+<script src="/js/employeeManager.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Movie Manage</title>
+    <!-- Required meta tags -->
+    <th:block th:replace="~{common/head :: headFragment}"></th:block>
+    <!--  Inject CSS -->
+    <link rel="stylesheet" href="/style/common_manager.css">
+    <link rel="stylesheet" href="/style/cm.css">
+    <link rel="stylesheet" href="/style/adminMovieList.css">
+    <link rel="stylesheet" href="/style/movieTable.css">
+    <style>
+        .highlight {
+            border: 3px solid black;
+        }
+        th {
+            text-align: center;
+        }
+
+        .main__table-text,
+        .main__table-btns {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body class="galaxy-theme">
+
+
+<div class="container-custom">
+    <div th:replace="~{common/sideBar :: sideBarFragment }"></div>
+
+
+    <div class="tab-content">
+        <div class="header">
+            <div class="d-flex justify-content-between" style="width: 100%">
+                <div>
+                    <i class="fa fa-bar-chart" aria-hidden="true"></i>
+                    <h1>Movie Manage</h1>
+                </div>
+
+            </div>
+        </div>
+        <div class="main-content container p-5 ">
+
+            <div class="d-flex justify-content-between">
+                <div class="d-flex justify-content-start">
+                    <button class="btn btn-dark me-2 fw-semibold" data-bs-toggle="modal"
+                            onclick="clearModalMovieData()"
+                            data-bs-target="#modalAddMovie">
+                        <i class="bi bi-plus-circle"></i>
+                        Add Movie
+                    </button>
+
+                    <select class="form-select ps-3 w-auto ms-2" id="pageSize">
+                        <option selected disabled>Select Row</option>
+                        <option value="10">-- 10 Rows --</option>
+                        <option value="20">-- 20 Rows --</option>
+                        <option value="30">-- 30 Rows --</option>
+                    </select>
+                </div>
+
+
+                <div class="d-flex justify-content-end" >
+                    <button class="btn btn-dark me-1" type="button" id="search-movie-btn">Search</button>
+                    <input aria-label="Search" id="movie-name-searching" class="form-control border-dark" placeholder="Enter Something..."
+                           style="width: 100%; border-radius: 1px solid #ccc;" type="search">
+                </div>
+            </div>
+
+
+            <!-- Movie -->
+            <div class="mt-3 mb-3" style="background-color: black;">
+                <div class="main__table-wrap">
+                    <table class="main__table">
+                        <thead>
+                        <tr>
+                            <th>Movie ID</th>
+                            <th>Movie Name</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        <tr>
+
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- end -->
+
+
+            <div class="d-flex justify-content-end">
+                <form id="indexForm" method="get" action="/">
+                    <div class="btn-group ms-5" role="group" aria-label="Basic mixed styles example">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                            </ul>
+                        </nav>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--Modal Add Movie-->
+<div class="modal fade" id="modalAddMovie" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
+     tabindex="-1">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" style="
+                        position: absolute; right: 20px; top: 20px; background-color: white" type="button"></button>
+
+                <div class="col-12 d-flex justify-content-center mt-3">
+                    <h2 class="d-inline-block fw-bold" id="modalTitle">ADD NEW MOVIE</h2>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <div class="d-flex justify-content-center">
+                        <div class="d-inline-block image-container image-container-small border border-dark me-3">
+                            <img src="" id="previewSmallImage" alt="">
+                        </div>
+                        <div class="d-inline-block image-container image-container-large border border-dark">
+                            <img src="" id="previewLargeImage" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <div style="width: 800px">
+                        <div class="row m-3 bg-body-secondary d-flex justify-content-around">
+                            <div class="col-12 mt-3 mb-3">
+                                <form id="form-movie">
+                                    <div class="row m-2">
+                                        <label for="inputSmallImage" class="text-end col-sm-3 col-form-label"><b>Small
+                                            Image:
+                                        </b></label>
+                                        <div class="col-sm-9">
+                                            <input type="file" class="form-control" id="inputSmallImage">
+                                        </div>
+                                    </div>
+
+                                    <div class="row border-top border-dark-subtle m-2">
+                                        <label for="inputLargeImage" class="text-end col-sm-3 col-form-label"><b>Large
+                                            Image:
+                                        </b></label>
+                                        <div class="col-sm-9">
+                                            <input type="file" class="form-control" id="inputLargeImage">
+                                        </div>
+                                    </div>
+
+                                    <div class="row border-top border-dark-subtle m-2">
+                                        <label for="inputMovieName" class="text-end col-sm-3 col-form-label"><b>Movie Name:
+                                        </b></label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" id="inputMovieName">
+                                            <span class="form-message"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="row border-top border-dark-subtle m-2">
+                                        <label for="inputDuration" class="text-end col-sm-3 col-form-label"><b>Duration(min):
+                                        </b></label>
+                                        <div class="col-sm-9">
+                                            <input type="number" class="form-control" id="inputDuration" min="0">
+                                            <span class="form-message"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="row border-top border-dark-subtle m-2">
+                                        <label for="inputDirector" class="text-end col-sm-3 col-form-label"><b>Director:
+                                        </b></label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" id="inputDirector">
+                                        </div>
+                                    </div>
+
+                                    <div class="row border-top border-dark-subtle m-2">
+                                        <label for="inputActor" class="text-end col-sm-3 col-form-label"><b>Actor:
+                                        </b></label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" id="inputActor">
+                                        </div>
+                                    </div>
+
+                                    <div class="row border-top border-dark-subtle m-2">
+                                        <label for="inputMovieProductionCompany"
+                                               class="text-end col-sm-3 col-form-label"><b>Producer:
+                                        </b></label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" id="inputMovieProductionCompany">
+                                        </div>
+                                    </div>
+
+                                    <div class="row border-top border-dark-subtle m-2">
+                                        <label for="inputIntroVideo"
+                                               class="text-end col-sm-3 col-form-label"><b>Intro Video:
+                                        </b></label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" id="inputIntroVideo">
+                                        </div>
+                                    </div>
+
+                                    <div class="row border-top border-dark-subtle m-2">
+                                        <label for="inputContent" class="text-end col-sm-3 col-form-label"><b>Content:
+                                        </b></label>
+                                        <div class="col-sm-9">
+                                            <textarea class="form-control" id="inputContent" style="height: 100px"></textarea>
+                                        </div>
+                                    </div>
+                                </form>
+                                <div class="row border-top border-dark-subtle m-2">
+                                    <label class="text-end col-sm-3 col-form-label"><b>Types:
+                                    </b></label>
+                                    <div class="col-9">
+                                        <div class="type-display-in-movie">
+
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-danger" data-bs-target="#modalChangeType"
+                                            data-bs-toggle="modal">
+                                        Change type
+                                    </button>
+                                </div>
+
+                                <div class="d-flex justify-content-center mt-3">
+                                    <!--                                    <button type="button" class="btn btn-secondary me-4" data-bs-dismiss="modal">Close-->
+                                    <!--                                    </button>-->
+                                    <button type="button" class="btn btn-danger" id="add-new-movie">Save</button>
+                                    <button type="button" class="btn btn-danger d-none" id="confirm-edit-movie">Save</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Modal change type-->
+<div class="modal fade" id="modalChangeType" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
+     data-bs-backdrop="static" data-bs-keyboard="false"
+     tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="col-12 d-flex justify-content-center">
+                    <h2 class="d-inline-block fw-bold" id="headerContent">CHOOSE TYPE</h2>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="row m-3 bg-body-secondary d-flex algin-items-center">
+                    <div class="col-sm-3 fw-semibold">Chosen Type:</div>
+                    <div class="col-sm-9 list-current-chosen-type"></div>
+                </div>
+                <div class="border border-dark-subtle"></div>
+                <div class="row m-3 bg-body-secondary d-flex algin-items-center">
+                    <div class="card card-body p-0 me-2">
+                        <form class="d-flex" role="search">
+                            <input class="form-control me-2 " type="search" placeholder="Search type..."
+                                   aria-label="Search" id="searchType">
+                            <button class="btn btn-success" type="submit"><i class="bi bi-search"></i></button>
+                        </form>
+                    </div>
+                    <div>
+
+                    </div>
+                    <div class="row m-3 bg-body-secondary d-flex justify-content-around">
+                        <div class="mt-3 mb-3 type-list-content">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer d-flex justify-content-between">
+                <form class="d-flex">
+                    <label for="inputTypeName" class="text-end col-sm-3 col-form-label me-2"><b>New Type Name:
+                    </b></label>
+                    <input type="text" class="form-control border-dark-subtle me-2" id="inputTypeName">
+                    <button type="button" class="btn btn-dark" id="add-new-type" style="width: 300px">Add New Type
+                    </button>
+                </form>
+                <span class="fw-semibold fst-italic fs-6" style="color: red"
+                      id="inputTypeNameMessage"></span>
+                <button class="btn btn-danger" data-bs-target="#modalAddMovie" data-bs-toggle="modal"
+                        id="confirm-type-chosen">Save
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--Modal add new type-->
+<!--<div class="modal fade" id="modalAddType" data-bs-keyboard="false" tabindex="-1"-->
+<!--     aria-hidden="true">-->
+<!--    <div class="modal-dialog modal-xl">-->
+<!--        <div class="modal-content">-->
+<!--            <div class="modal-header">-->
+<!--                <div class="col-12 d-flex justify-content-center mt-3">-->
+<!--                    <h2 class="d-inline-block" id="modalHeaderType">Type Manage</h2>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="modal-body">-->
+<!--                <div class="row m-3 bg-body-secondary d-flex justify-content-around">-->
+<!--                    <div class="col-7 mt-3 mb-3 type-list-content">-->
+<!--                    </div>-->
+<!--                    <div class="col-5 mt-3 mb-3 border-start border-dark-subtle">-->
+<!--                        <form id="form-movie-type">-->
+<!--                            <div class="row m-2 d-flex align-items-center">-->
+<!--                                <label for="inputTypeName" class="text-end col-sm-3 col-form-label"><b>Type Name:-->
+<!--                                </b></label>-->
+<!--                                <div class="col-sm-9">-->
+<!--                                    <input type="text" class="form-control border-dark-subtle" id="inputTypeName">-->
+<!--                                    <span class="fw-semibold fst-italic fs-6" style="color: red"-->
+<!--                                          id="inputTypeNameMessage"></span>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="d-flex justify-content-end mt-3 me-3">-->
+<!--                                <button type="button" class="btn btn-danger" id="add-new-type">Add</button>-->
+<!--                            </div>-->
+<!--                        </form>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="modal-footer">-->
+<!--                <button type="button" class="btn btn-secondary me-4" data-bs-dismiss="modal">Save-->
+<!--                </button>-->
+<!--                <button type="button" class="btn btn-secondary me-4" data-bs-dismiss="modal">Close-->
+<!--                </button>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--Modal Type Choose In Movie-->
+
+
+<!-- Bootstrap JavaScript Libraries -->
+<th:block th:replace="~{common/scriptFile :: scriptFragment}"></th:block>
+<!-- Inject js-->
+<script src="/js/common_get_account.js"></script>
+<script src="/js/adminMovieList.js"></script>
+<script src="/js/movieManageLoadData.js"></script>
+<!--<script src="/js/paymentLoad.js"></script>-->
+
+<!-- Inject js-->
+</body>
+</html>

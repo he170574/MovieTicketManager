@@ -1,0 +1,242 @@
+<th:block th:fragment="headerFragment">
+    <div class="lsd-ring-container d-none">
+        <div class="lds-ring">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <header>
+        <nav class="navbar-custom navbar navbar-expand">
+            <div class=" container">
+                <a href="/test-home" class="navbar-brand">
+                    <img src="/img/logoNew.png" width="100" alt="Logo_Brand">
+                </a>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                        <li class="nav-item d-flex align-items-center">
+                            <a class="nav-link px-3 active" aria-current="page" href="/test-home">Home</a>
+                        </li>
+                        <li class="nav-item d-flex align-items-center">
+                            <a class="nav-link px-3" aria-current="page" href="/all-movie">What movies are on that day?</a>
+                        </li>
+                    </ul>
+                </div>
+                <span id="account-logo" class="navbar-brand p-0"
+                      style="cursor: pointer;width: 40px;height: 40px;border-radius: 50%;overflow: hidden">
+                    <img src="/img/user_img_default.png" id="account-img" alt="Member"
+                         style="object-fit: cover;object-position: center;width: 100%;height: 100%">
+                </span>
+            </div>
+        </nav>
+
+        <!-- Modal Login -->
+        <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" style="width: 450px;">
+                <div class="modal-content" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+
+                    <div class="modal-header d-flex justify-content-center header-login bg-dark p-3"
+                         style="border-top-right-radius: 6px;border-top-left-radius: 6px;">
+                        <img src="/img/logoNew.png" style="width: 250px;" alt="">
+                    </div>
+
+                    <div class="modal-body body-login p-4">
+
+                        <div class="px-5 mb-3">
+                            <div class="d-flex justify-content-center my-3">
+                                <h4 class="fw-bold">Have we met before?</h4>
+                            </div>
+                            <div class="d-flex align-items-center text-xl-center" style="color: grey;">
+                                Great to see you here! Just one step before we take you to checkout.
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between">
+                                    <label class="fw-semibold form-label" for="username">Username</label>
+                                </div>
+                                <input type="text" class="form-control border border-dark-subtle" id="username"
+                                       name="username" aria-describedby="emailHelp" autocomplete="username">
+                                <span class="form-message form-text text-danger"></span>
+                            </div>
+
+                            <div class="mb-4">
+                                <div class="d-flex justify-content-between">
+                                    <label class="fw-semibold form-label" for="password">Password</label>
+                                    <a href="/forgot-password" style="font-size: 14px;text-decoration: dashed;"
+                                       class="nav-link fw-semibold">Forgot Password?</a>
+                                </div>
+                                <input type="password" class="form-control border border-dark-subtle" id="password"
+                                       name="password" autocomplete="current-password">
+                                <span class="form-message form-text text-danger"></span>
+                            </div>
+                            <button type="button" id="send-form-login" class="btn btn-dark fw-semibold"
+                                    style="width: 100%;">
+                                Sign in
+                            </button>
+                        </div>
+
+                        <div class="d-flex justify-content-center mt-3 mb-5">
+                            <span>New Member?</span>
+                            <a type="button" style="text-decoration: underline;" class="ms-1 nav-link fw-semibold"
+                               data-bs-toggle="modal" data-bs-target="#registerModal" href="#">Create a New Movie
+                                account</a>
+                        </div>
+
+                        <div class="my-2" style="font-size: 14px; color: grey;">
+                            Envato collects and uses personal data in accordance with our Privacy Policy. By creating an
+                            account, you agree to our Terms & Conditions.
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Register -->
+        <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" style="width: 450px;">
+                <div class="modal-content" style=" font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+
+                    <div class="modal-header d-flex justify-content-center header-login bg-dark p-3"
+                         style="border-top-right-radius: 6px;border-top-left-radius: 6px;">
+                        <img src="/img/logoNew.png" style="width: 150px;" alt="">
+                    </div>
+
+                    <div class="modal-body body-login p-4">
+
+                        <div class="px-5 mb-3">
+                            <div class="d-flex justify-content-center my-2">
+                                <h3 class="fw-bold">Create Account</h3>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-center" style="color: grey;">
+                                Already have account?
+                                <a type="button" class="ms-1 nav-link fw-semibold text-dark" data-bs-toggle="modal"
+                                   data-bs-target="#x" href="#">Sign in</a>
+                            </div>
+                        </div>
+
+                        <div id="form-register">
+                            <div class="form-group mb-3">
+                                <div class="d-flex justify-content-between">
+                                    <label class="fw-semibold form-label" for="username-register">Username</label>
+                                </div>
+                                <input type="text" class="form-control border border-dark-subtle" id="username-register"
+                                       name="usernameRegister" aria-describedby="emailHelp" autocomplete="username">
+                                <span class="form-message form-text text-danger"></span>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <div class="d-flex justify-content-between">
+                                    <label class="fw-semibold form-label" for="password-register">Password</label>
+                                </div>
+                                <input type="password" class="form-control border border-dark-subtle"
+                                       id="password-register" name="passwordRegister" autocomplete="current-password">
+                                <span class="form-message form-text text-danger"></span>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <div class="d-flex justify-content-between">
+                                    <label class="fw-semibold form-label" for="confirm-password">Confirm password</label>
+                                </div>
+                                <input type="password" class="form-control border border-dark-subtle"
+                                       id="confirm-password" name="confirmPassword" autocomplete="new-password">
+                                <span class="form-message form-text text-danger"></span>
+                            </div>
+
+                            <div class="form-group mb-4">
+                                <div class="d-flex justify-content-between">
+                                    <label class="fw-semibold form-label" for="full-name">Full name</label>
+                                </div>
+                                <input type="text" class="form-control border border-dark-subtle" id="full-name"
+                                       name="fullName">
+                                <span class="form-message form-text text-danger"></span>
+                            </div>
+
+                            <div class="form-group mb-3 container">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="fw-semibold">Gender</div>
+                                        <div class="mt-2">
+                                            <div class="form-check d-inline-block me-3">
+                                                <input class="form-check-input" type="radio" name="gender"
+                                                       checked id="flexRadioDefault1" value="Male">
+                                                <label class="form-check-label" for="flexRadioDefault1">
+                                                    Male
+                                                </label>
+                                            </div>
+                                            <div class="form-check d-inline-block">
+                                                <input class="form-check-input" type="radio" name="gender"
+                                                       id="flexRadioDefault2" value="Female">
+                                                <label class="form-check-label" for="flexRadioDefault2">
+                                                    Female
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <label class="fw-semibold form-label" for="dob">Date of birth</label>
+                                        <div>
+                                            <input type="date" class="form-control border border-dark-subtle" id="dob"
+                                                   name="dob">
+                                            <span class="form-message form-text text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-4">
+                                <div class="d-flex justify-content-between">
+                                    <label class="fw-semibold form-label" for="identity-card">Identity card</label>
+                                </div>
+                                <input type="text" class="form-control border border-dark-subtle" id="identity-card"
+                                       name="identityCard">
+                                <span class="form-message form-text text-danger"></span>
+                            </div>
+
+                            <div class="form-group mb-4">
+                                <div class="d-flex justify-content-between">
+                                    <label class="fw-semibold form-label" for="email">Email</label>
+                                </div>
+                                <input type="email" class="form-control border border-dark-subtle" id="email"
+                                       name="email">
+                                <span class="form-message form-text text-danger"></span>
+                            </div>
+
+                            <div class="form-group mb-4">
+                                <div class="d-flex justify-content-between">
+                                    <label class="fw-semibold form-label" for="address">Address</label>
+                                </div>
+                                <input type="text" class="form-control border border-dark-subtle" id="address"
+                                       name="address">
+                                <span class="form-message form-text text-danger"></span>
+                            </div>
+
+                            <div class="form-group mb-4">
+                                <div class="d-flex justify-content-between">
+                                    <label class="fw-semibold form-label" for="phone-number">Phone number</label>
+                                </div>
+                                <input type="text" class="form-control border border-dark-subtle" id="phone-number"
+                                       name="phoneNumber">
+                                <span class="form-message form-text text-danger"></span>
+                            </div>
+
+                            <button type="submit" class="btn btn-dark fw-semibold" style="width: 100%;"
+                                    id="submit-form-register">
+                                Create Account
+                            </button>
+                        </div>
+
+                        <div class="my-3" style="font-size: 14px; color: grey;">
+                            Envato collects and uses personal data in accordance with our Privacy Policy. By creating an
+                            account, you agree to our Terms & Conditions.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </header>
+</th:block>

@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Employee Manager</title>
+    <!-- Required meta tags -->
+    <th:block th:replace="~{common/head :: headFragment}"></th:block>
+
+    <!--  Inject CSS -->
+    <link rel="stylesheet" href="/style/common_manager.css">
+    <link rel="stylesheet" href="/style/admin.css">
+</head>
+
+<body>
+<div class="container-custom">
+    <div th:replace="~{common/sideBar :: sideBarFragment }"></div>
+    <div class="tab-content">
+        <div class="header">
+            <div>
+                <i class="fa fa-bar-chart" aria-hidden="true"></i>
+                <h1>Employee Manager</h1>
+            </div>
+        </div>
+
+        <div class="main-content container-fluid p-5 ">
+            <!-- <button type="button" class="btn btn-primary mb-3" id="showFormBtn" onclick="toggleForm()">
+                <i class="bi bi-plus-circle"></i>
+                Add new
+            </button> -->
+            <div class="d-flex justify-content-between">
+                <div class="d-flex">
+
+                    <select class="form-select ps-3 w-auto me-1" id="pageSize">
+                        <option selected disabled>Select Row</option>
+                        <option value="10">-- 10 Rows --</option>
+                        <option value="20">-- 20 Rows --</option>
+                        <option value="30">-- 30 Rows --</option>
+                    </select>
+
+                    <span class="btn btn-dark" id="addNew" data-id="1" style="color: white"
+                          data-bs-target="#information-form" data-bs-toggle="modal">
+                        <i class="bi bi-plus-circle"></i>
+                        Add new </span>
+
+                    <span class="btn btn-danger ms-2" id="show-deleted-employee" data-id="1" style="color: white"
+                          data-bs-target="#showInactiveEmp" data-bs-toggle="modal">
+                        <i class="bi bi-list-ul"></i>
+                        Inactive employee </span>
+                </div>
+
+
+                <form class="d-flex justify-content-end" role="search">
+                    <button class="btn btn-dark me-1" type="button" id="search">Search</button>
+                    <input class="form-control border-dark" type="search" aria-label="Search" id="search-value"
+                           style="width: 100%;" placeholder="Enter Employee Name...">
+                </form>
+            </div>
+
+
+            <!-- users -->
+            <div style="background-color: black;" class="mt-3 mb-3">
+                <div class="main__table-wrap" style="overflow-x: scroll">
+                    <table class="main__table">
+                        <thead>
+                        <tr>
+                            <th>Employee Id</th>
+                            <th>Username</th>
+                            <th>Full Name</th>
+                            <th>Date of birth</th>
+                            <th>Gender</th>
+                            <th>Email</th>
+                            <th>Phone number</th>
+                            <th>Address</th>
+                            <th>Register date</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+
+                        <tbody id="table-data">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- end users -->
+
+
+            <div class="d-flex justify-content-end">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <li class="page-item"><span class="page-link">Previous</span></li>
+                        <li class="page-item"><span class="page-link active">1</span></li>
+                        <li class="page-item"><span class="page-link">Next</span></li>
+                    </ul>
+                </nav>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Modal   -->
+<div class="modal fade" id="showInactiveEmp" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog custom-modal-size">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="col-12 d-flex justify-content-center mt-3">
+                    <h2 class="d-inline-block" id="staticBackdropLabel">List Employee Inactive</h2>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="row m-3 bg-body-secondary d-flex justify-content-around">
+
+                    <table class="main__table">
+                        <thead>
+                        <tr>
+                            <th>Employee Id</th>
+                            <th>Username</th>
+                            <th>Full Name</th>
+                            <th>Email</th>
+                            <th>Phone number</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+
+                        <tbody id="table-data-dEmp">
+
+                        </tbody>
+
+                    </table>
+                    <div class="d-flex justify-content-center mt-3 mb-2">
+                        <button type="button" class="btn btn-secondary me-4" data-bs-dismiss="modal">Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="information-form" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content" style=" font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+
+            <div class="modal-header d-flex justify-content-center header-login bg-dark p-3"
+                 style="border-top-right-radius: 6px;border-top-left-radius: 6px;">
+                <img src="/img/logo_img.png" style="width: 150px;" alt="">
+            </div>
+
+            <div class="modal-body body-login p-4">
+
+                <div class="px-5 mb-3">
+                    <div class="d-flex justify-content-center my-2">
+                        <h3 class="fw-bold" id="modal-head">Employee Form</h3>
+                    </div>
+                </div>
+                <div id="form-register">
+                    <div class="row justify-content-around">
+                        <div class="form-group mb-3 col-6">
+                            <div class="d-flex justify-content-between">
+                                <label class="fw-semibold form-label" for="username">Account</label>
+                            </div>
+                            <input type="text" class="form-control border border-dark-subtle" id="username"
+                                   name="usernameRegister" aria-describedby="emailHelp" autocomplete="username">
+                            <span class="form-message form-text text-danger"></span>
+                        </div>
+                        <div class="form-group mb-4 col-6">
+                            <div class="d-flex justify-content-between">
+                                <label class="fw-semibold form-label" for="full-name">Full name</label>
+                                <!-- <a href="" style="font-size: 14px">Forgot</a> -->
+                            </div>
+                            <input type="text" class="form-control border border-dark-subtle" id="full-name"
+                                   name="fullName">
+                            <span class="form-message form-text text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row justify-content-around">
+                        <div class="form-group mb-3 col-6">
+                            <div class="d-flex justify-content-between">
+                                <label class="fw-semibold form-label" for="password">Password</label>
+                                <!-- <a href="" style="font-size: 14px">Forgot</a> -->
+                            </div>
+                            <input type="password" class="form-control border border-dark-subtle"
+                                   id="password" name="passwordRegister" autocomplete="current-password">
+                            <span class="form-message form-text text-danger"></span>
+                            <!-- <div style="color: grey; font-size: 15px;">Use 8 or more characters with a mix of letters, numbers and symbols. Must not contain your name or username.</div> -->
+                        </div>
+
+                        <div class="form-group mb-3 col-6">
+                            <div class="d-flex justify-content-between">
+                                <label class="fw-semibold form-label" for="confirm-password">Confirm password</label>
+                                <!-- <a href="" style="font-size: 14px">Forgot</a> -->
+                            </div>
+                            <input type="password" class="form-control border border-dark-subtle"
+                                   id="confirm-password" name="confirmPassword" autocomplete="new-password">
+                            <span class="form-message form-text text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group mb-3 container">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="fw-semibold">Gender</div>
+                                <div class="mt-2">
+                                    <div class="form-check d-inline-block me-3">
+                                        <input class="form-check-input" type="radio" name="gender"
+                                               checked id="flexRadioDefault1" value="Male">
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                            Male
+                                        </label>
+                                    </div>
+                                    <div class="form-check d-inline-block">
+                                        <input class="form-check-input" type="radio" name="gender"
+                                               id="flexRadioDefault2" value="Female">
+                                        <label class="form-check-label" for="flexRadioDefault2">
+                                            Female
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <label class="fw-semibold form-label" for="identity-card">Date of
+                                    birth</label>
+                                <div>
+                                    <input type="date" class="form-control border border-dark-subtle" id="dob"
+                                           name="dob">
+                                    <span class="form-message form-text text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-around">
+                        <div class="form-group mb-4 col-6">
+                            <div class="d-flex justify-content-between">
+                                <label class="fw-semibold form-label" for="identity-card">Identity
+                                    card</label>
+                                <!-- <a href="" style="font-size: 14px">Forgot</a> -->
+                            </div>
+                            <input type="text" class="form-control border border-dark-subtle" id="identity-card"
+                                   name="identityCard">
+                            <span class="form-message form-text text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-4 col-6">
+                            <div class="d-flex justify-content-between">
+                                <label class="fw-semibold form-label" for="identity-card">Email</label>
+                                <!-- <a href="" style="font-size: 14px">Forgot</a> -->
+                            </div>
+                            <input type="email" class="form-control border border-dark-subtle" id="email"
+                                   name="email">
+                            <span class="form-message form-text text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-around">
+                        <div class="form-group mb-4 col-6">
+                            <div class="d-flex justify-content-between">
+                                <label class="fw-semibold form-label" for="identity-card">Address</label>
+                                <!-- <a href="" style="font-size: 14px">Forgot</a> -->
+                            </div>
+                            <input type="text" class="form-control border border-dark-subtle" id="address"
+                                   name="address">
+                            <span class="form-message form-text text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-4 col-6">
+                            <div class="d-flex justify-content-between">
+                                <label class="fw-semibold form-label" for="identity-card">Phone
+                                    number</label>
+
+                                <!-- <a href="" style="font-size: 14px">Forgot</a> -->
+                            </div>
+                            <input type="text" class="form-control border border-dark-subtle" id="phone-number"
+                                   name="phoneNumber">
+                            <span class="form-message form-text text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row justify-content-around">
+                        <div class="form-group mb-3 col-6">
+                            <div class="d-flex justify-content-between">
+                                <label class="fw-semibold form-label" for="account-image">Upload Avatar</label>
+                            </div>
+                            <input type="file" class="form-control border border-dark-subtle"
+                                   id="account-image" name="passwordRegister">
+                            <span class="form-message form-text text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3 col-6 text-center">
+                            <img src="/img/user_img_default.png" alt="Account_Default_Imgage" class="w-75"
+                                 id="preview-account-image" style="border-radius: 50%"/>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-dark fw-semibold d-none" style="width: 100%;"
+                            id="submit-form">
+                        Create
+                    </button>
+                    <button type="button" class="btn btn-dark fw-semibold d-none" style="width: 100%;"
+                            id="submit-update-form">
+                        Update
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- Bootstrap JavaScript Libraries -->
+<th:block th:replace="~{common/scriptFile :: scriptFragment}"></th:block>
+<!-- Inject js-->
+<script src="/js/common_get_account.js"></script>
+<script src="/js/addressConfig.js"></script>
+<!-- Inject js-->
+<script src="/js/employeeList.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Netflex</title>
+    <!-- Required meta tags -->
+    <th:block th:replace="~{common/head :: headFragment}"></th:block>
+    <!-- Inject CSS -->
+    <link rel="stylesheet" href="/style/common.css">
+    <link rel="stylesheet" href="/style/home.css">
+    <style>
+        .carousel-item {
+            position: relative;
+            width: 100%;
+            height: 500px;
+        }
+        .carousel-item img,
+        .carousel-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .carousel-item video {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .overlay-text {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            font-size: 24px;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 5px;
+            max-width: 33%;
+        }
+        .overlay-text h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+        .overlay-text p {
+            margin: 10px 0;
+            font-size: 18px;
+        }
+        .overlay-text .button {
+            display: inline-block;
+            background-color: #ff0000;
+            color: #ffffff;
+            padding: 8px 8px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+        .modal-overlay-image {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            position: relative;
+        }
+        .modal-header-overlay {
+            position: relative;
+            text-align: center;
+            color: white;
+            background-color: black;
+        }
+        .modal-header-overlay img {
+            width: 100%;
+            opacity: 1;
+        }
+        .modal-content{
+            margin-left: -35px;
+            width: 120%;
+        }
+        .modal-body {
+            background-color: black;
+            color: white;
+        }
+        .btn-dat-ve {
+            display: inline-block;
+            background-color: #ff0000;
+            color: #ffffff;
+            padding: 8px 8px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+<div th:replace="~{common/header :: headerFragment}"></div>
+<main>
+    <div class="container">
+        <div class="m-5">
+            <h1>Account Activation</h1>
+            <div th:text="${message}?:'Activate Account with Email Successfull!'"></div>
+        </div>
+    </div>
+</main>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap JavaScript Libraries -->
+<th:block th:replace="~{common/scriptFile :: scriptFragment}"></th:block>
+<!-- Inject js-->
+<script src="/js/common_customer_page.js"></script>
+<script src="/js/home.js"></script>
+
+</body>
+
+</html>

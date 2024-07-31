@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+<h2>Welcome</h2>
+<a th:href="@{/}">Home</a><br/>
+<a th:href="@{/logout}">Logout</a>
+<p>Spring Security Thymeleaf tutorial</p>
+<div sec:authorize="hasRole('ADMIN')">Text visible to ADMIN.</div>
+<div sec:authorize="hasRole('MANAGER')">Text visible to MANAGER.</div>
+<div sec:authorize="hasRole('EMPLOYEE')">Text visible to EMPLOYEE.</div>
+<div sec:authorize="hasRole('MEMBER')">Text visible to MEMBER.</div>
+<br/>
+<div sec:authorize="isAuthenticated()">
+    Text visible only to authenticated users.
+</div>
+<br/>
+<div sec:authorize="hasAnyRole('MEMBER', 'RECRUITER', 'SELLER')">
+    Text visible to MEMBER, RECRUITER or SELLER.
+</div>
+<br/>
+Authenticated username: <span sec:authentication="name"></span><br/>
+Authenticated username: <span sec:authentication="principal.username"></span><br/>
+Authenticated user roles: <span sec:authentication="principal.authorities"></span>
+
+<br/>
+<br/>
+</body>
+
+</html>

@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Payment</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+  <!-- Bootstrap CSS v5.2.1 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+  <!-- Bootstrap Icon -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+  <!-- Inject CSS -->
+  <link rel="stylesheet" href="/style/common.css">
+  <link rel="stylesheet" href="/style/home.css">
+  <style>
+    .lable {
+      color: gray !important;
+      font-size: 15px;
+    }
+
+    .lable,
+    p {
+      margin: 0;
+    }
+
+    .amount {
+      font-size: 24px;
+    }
+
+    .qr {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: black;
+      width: 600px;
+      height: 600px;
+      border-radius: 15px;
+    }
+
+    .col-6 {
+      margin-left: 20px;
+      margin-right: 20px;
+    }
+
+    .time {
+      height: 50px;
+      width: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: rgb(255, 255, 255);
+      color: #000;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+
+<body class="bg-light">
+<header>
+  <nav class="navbar-custom navbar navbar-expand">
+    <div class=" container">
+      <a href="#" class="navbar-brand">
+        <img src="/img/logo_img.png" width="100" alt="Logo_Brand">
+      </a>
+    </div>
+  </nav>
+</header>
+
+<main class="main-content" style="height: 80vh; display: flex; justify-content: center;">
+  <div class="mt-5" style="text-align: center;">
+    <h1>Ticket booking failed!</h1>
+    <p style="color: red;">An error occurred during the booking process. Please understand and try again next time.</p>
+    <div class="mt-5">
+      <a href="/home" >Back to home page</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="row footer-link">
+      <div class="col">
+        <h5>Info</h5>
+        <ul>
+          <li>
+            <i class="bi bi-geo-alt-fill"></i>
+            Some Where in VietNam
+          </li>
+          <li>
+            <i class="bi bi-envelope"></i>
+            Gmail@Gmail.com
+          </li>
+          <li>
+            <i class="bi bi-phone"></i>
+            Call Us: 0941229227
+          </li>
+        </ul>
+      </div>
+      <div class="col">
+        <h5>Shows</h5>
+        <ul>
+          <li>Angels in the city</li>
+          <li>The Color Purple</li>
+          <li>Antomy of a Suicide</li>
+          <li>Lorem ipsum dolor</li>
+        </ul>
+      </div>
+      <div class="col">
+        <h5>Tearms and Coditions</h5>
+        <ul>
+          <li>Conditions of Website Use</li>
+          <li>Terms of use</li>
+          <li>Payment Policy</li>
+          <li>Private policy</li>
+        </ul>
+      </div>
+    </div>
+    <div class="row footer-social">
+      <div class="text-center">
+        <i class="bi bi-linkedin"></i>
+        <i class="bi bi-facebook"></i>
+        <i class="bi bi-twitter"></i>
+        <i class="bi bi-skype"></i>
+        <i class="bi bi-instagram"></i>
+        <i class="bi bi-threads"></i>
+      </div>
+      <div class="text-center">
+        <img src="/img/logo_img.png" style="width: 150px;" alt="">
+      </div>
+      <div class="text-center">
+        <p>
+          This is a sample website - cmsmasters © 2023 / All Rights Reserved
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- Bootstrap JavaScript Libraries -->
+<th:block th:replace="~{common/scriptFile :: scriptFragment}"></th:block>
+<script src="/js/paymentLoad.js"></script>
+</body>
+
+</html>

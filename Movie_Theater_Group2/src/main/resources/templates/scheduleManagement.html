@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Schedule Management</title>
+    <!-- Required meta tags -->
+    <th:block th:replace="~{common/head :: headFragment}"></th:block>
+
+    <!--  Inject CSS -->
+    <link rel="stylesheet" href="/style/common_manager.css">
+    <link rel="stylesheet" href="/style/showtime.css">
+    <link rel="stylesheet" href="/style/scheduleManagement.css">
+    <link rel="stylesheet" href="/style/adminMovieList.css">
+</head>
+
+<body>
+<div class="container-custom">
+    <div th:replace="~{common/sideBar :: sideBarFragment }"></div>
+
+    <div class="tab-content">
+        <div class="header">
+            <div>
+                <i class="bi bi-table"></i>
+                <h1>Schedule Management</h1>
+            </div>
+        </div>
+        <div class="main-content container p-5 ">
+            <div class="row border-bottom border-2 border-dark pb-4 justify-content-between">
+                <div class="col-3">
+                    <label for="search-by-date" class="form-label fw-bold fs-4">Select date: </label>
+                    <div class="d-flex" role="search">
+                        <input type="date" class="form-control border" id="search-by-date">
+                    </div>
+                </div>
+                <div class="col-3 d-flex align-items-end justify-content-end">
+                    <button type="button" class="btn btn-dark" style="width: fit-content;height: fit-content">View All Movie Schedule</button>
+                </div>
+            </div>
+            <div class="row">
+                <div id="schedule-room-container">
+                    <!--List room-->
+
+<!--                    <div class="row mt-4 schedule" data-room-id="` + value.id + `">-->
+<!--                        <div class="d-flex justify-content-between pb-2">-->
+<!--                            <div class="d-flex align-items-center justify-content-start" style="height: 100%">-->
+<!--                                <h4 class="fw-bold room-name">Room 001</h4>-->
+<!--                            </div>-->
+
+<!--                            <div class="">-->
+<!--                                <button type="button" class="btn btn-danger open-modal-add-schedule"-->
+<!--                                        data-dismiss="modal">-->
+<!--                                    + Add Movie-->
+<!--                                </button>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-12 px-0 time-movie-detail">-->
+<!--                            <div class="container">-->
+<!--                                <div class="row">-->
+<!--                                    <div class="fw-bold text-center detail-time col p-0" style="overflow: hidden">-->
+<!--                                        00:00-->
+<!--                                    </div>-->
+<!--                                    <div class="fw-bold text-center detail-time col p-0" style="overflow: hidden">-->
+<!--                                        01:00-->
+<!--                                    </div>-->
+<!--                                    <div class="fw-bold text-center detail-time col p-0" style="overflow: hidden">-->
+<!--                                        02:00-->
+<!--                                    </div>-->
+<!--                                    <div class="fw-bold text-center detail-time col p-0" style="overflow: hidden">-->
+<!--                                        03:00-->
+<!--                                    </div>-->
+<!--                                    <div class="fw-bold text-center detail-time col p-0" style="overflow: hidden">-->
+<!--                                        04:00-->
+<!--                                    </div>-->
+<!--                                    <div class="fw-bold text-center detail-time col p-0" style="overflow: hidden">-->
+<!--                                        05:00-->
+<!--                                    </div>-->
+<!--                                    <div class="fw-bold text-center detail-time col p-0" style="overflow: hidden">-->
+<!--                                        06:00-->
+<!--                                    </div>-->
+<!--                                    <div class="fw-bold text-center detail-time col p-0" style="overflow: hidden">-->
+<!--                                        07:00-->
+<!--                                    </div>-->
+<!--                                    <div class="fw-bold text-center detail-time col p-0" style="overflow: hidden">-->
+<!--                                        08:00-->
+<!--                                    </div>-->
+<!--                                    <div class="fw-bold text-center detail-time col p-0" style="overflow: hidden">-->
+<!--                                        09:00-->
+<!--                                    </div>-->
+<!--                                    <div class="fw-bold text-center detail-time col p-0" style="overflow: hidden">-->
+<!--                                        10:00-->
+<!--                                    </div>-->
+<!--                                    <div class="fw-bold text-center detail-time col p-0" style="overflow: hidden">-->
+<!--                                        11:00-->
+<!--                                    </div>-->
+<!--                                    <div class="fw-bold text-center detail-time col p-0" style="overflow: hidden">-->
+<!--                                        12:00-->
+<!--                                    </div>-->
+<!--                                    <div class="fw-bold text-center detail-time col p-0" style="overflow: hidden">-->
+<!--                                        13:00-->
+<!--                                    </div>-->
+<!--                                    <div class="fw-bold text-center detail-time col p-0" style="overflow: hidden">-->
+<!--                                        14:00-->
+<!--                                    </div>-->
+<!--                                    <div class="fw-bold text-center detail-time col p-0" style="overflow: hidden">-->
+<!--                                        15:00-->
+<!--                                    </div>-->
+<!--                                    <div class="fw-bold text-center detail-time col p-0" style="overflow: hidden">-->
+<!--                                        16:00-->
+<!--                                    </div>-->
+<!--                                    <div class="fw-bold text-center detail-time col p-0" style="overflow: hidden">-->
+<!--                                        17:00-->
+<!--                                    </div>-->
+<!--                                    <div class="fw-bold text-center detail-time col p-0" style="overflow: hidden">-->
+<!--                                        18:00-->
+<!--                                    </div>-->
+<!--                                    <div class="fw-bold text-center detail-time col p-0" style="overflow: hidden">-->
+<!--                                        19:00-->
+<!--                                    </div>-->
+<!--                                    <div class="fw-bold text-center detail-time col p-0" style="overflow: hidden">-->
+<!--                                        20:00-->
+<!--                                    </div>-->
+<!--                                    <div class="fw-bold text-center detail-time col p-0" style="overflow: hidden">-->
+<!--                                        21:00-->
+<!--                                    </div>-->
+<!--                                    <div class="fw-bold text-center detail-time col p-0" style="overflow: hidden">-->
+<!--                                        22:00-->
+<!--                                    </div>-->
+<!--                                    <div class="fw-bold text-center detail-time col p-0"-->
+<!--                                         style="overflow: hidden; border-right: 2px solid black">23:00-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-12 px-0">-->
+<!--                            <div class="progress-stacked bg bg-dark" style="border: 2px solid black; height: 65px;-->
+<!--                            border-top-left-radius: 0; border-top-right-radius: 0">-->
+
+<!--                                <div class="progress empty-schedule" role="progressbar" aria-label="Segment one"-->
+<!--                                     aria-valuenow="0"-->
+<!--                                     aria-valuemin="0" aria-valuemax="1440"-->
+<!--                                     data-movie-id="">-->
+<!--                                    <div class="progress-bar bg bg-dark">-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+<!--                    </div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Movie Schedule Modal-->
+<div class="modal fade" id="add-movie-schedule" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
+     data-bs-keyboard="false"
+     tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl" style="min-width: 90vw">
+        <div class="modal-content">
+            <div class="modal-header bg bg-dark text-light">
+                <div class="col-12 d-flex justify-content-center">
+                    <h2 class="d-inline-block fw-bold" id="headerContent">Create Movie Schedule</h2>
+                </div>
+            </div>
+            <div class="modal-body container-fluid position-relative" id="movie-schedule-modal-content">
+                <div class="row justify-content-around">
+                    <div class="col-4 px-2">
+                        <div class="card card p-4 position-sticky top-0">
+                            <h3 id="modal-head">Schedule Information</h3>
+                            <div class="pb-4 mt-3">
+                                <label class="fw-semibold">Room Name: </label>
+                                <span class="" id="roomChosenName">------</span>
+                            </div>
+                            <div class="pb-4">
+                                <label class="fw-semibold" for="add-schedule-date">Date: </label>
+                                <input type="date" class="form-control" id="add-schedule-date">
+                            </div>
+                            <div class="pb-4">
+                                <label class="fw-semibold" for="add-schedule-start-time">Start Time: </label>
+                                <input type="time" class="form-control" id="add-schedule-start-time">
+                            </div>
+                            <div class="pb-4">
+                                <span class="fw-semibold">Movie: </span>
+                                <span class="" id="movieChosenName">-----</span>
+                            </div>
+                            <div class="pb-4">
+                                <span class="fw-semibold">Duration: </span>
+                                <span  id="movieChosenDuration">--:--</span>
+                                <span> min</span>
+                            </div>
+                            <div class="">
+                                <label class="fw-semibold pb-3" >Seat Price (VNĐ): </label>
+                                <div class="d-flex gap-3">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="add-schedule-seat-normal-price" value="">
+                                        <label for="add-schedule-seat-normal-price">Normal Seat</label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="add-schedule-seat-vip-price" value="">
+                                        <label for="add-schedule-seat-vip-price">VIP Seat</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 d-flex justify-content-end">
+                                <button class="btn btn-dark d-none" id="submit-create-movie-schedule">Create</button>
+                                <button class="btn btn-dark me-2" id="submit-update-movie-schedule">Update</button>
+                                <button class="btn btn-danger" id="submit-delete-movie-schedule">Delete</button>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-8 px-2">
+                        <div class="card p-4">
+                            <h3>Choose Movie</h3>
+
+                            <div class="m-3 d-flex justify-content-end">
+                                <input class="form-control me-2 " type="search" placeholder="Search movie name..."
+                                       aria-label="Search" id="search-movie-input">
+                                <button class="btn btn-dark" type="submit" id="search-movie-button"><i class="bi bi-search"></i></button>
+                            </div>
+                            <div class="m-3 row justify-content-start" id="list-movie-container" style="flex-wrap: wrap">
+                                <!--List Movie-->
+<!--                                <div class="col-xl-4 col-6 mb-3">-->
+<!--                                    <div class="card">-->
+<!--                                        <img src="/img/Movie/product_1.jpg" class="card-img-top" alt="...">-->
+<!--                                        <div class="card-body">-->
+<!--                                            <h5 class="card-title">Movie Name: <span>-&#45;&#45;&#45;&#45;</span></h5>-->
+<!--                                            <p class="card-text">Duration: <span>&#45;&#45;:&#45;&#45;</span> min</p>-->
+<!--                                            <a href="#" class="btn btn-dark">Choose this</a>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+                            </div>
+                            <div class="spinner-border" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                            <button type="button" class="btn btn-secondary d-none m-auto w-75" id="btn-show-more-movie">View More...</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JavaScript Libraries -->
+<th:block th:replace="~{common/scriptFile :: scriptFragment}"></th:block>
+<!-- Inject js-->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const normalPriceInput = document.getElementById('add-schedule-seat-normal-price');
+        const vipPriceInput = document.getElementById('add-schedule-seat-vip-price');
+        const dateInput = document.getElementById('add-schedule-date');
+        const timeInput = document.getElementById('add-schedule-start-time');
+
+        function updateSeatPrices() {
+            const dateValue = new Date(dateInput.value);
+            const dayOfWeek = dateValue.getDay();
+
+            let normalPrice = 10000; // Giá vé trong tuần
+            let vipPrice = 20000; // Giá vé cuối tuần
+
+            if (dayOfWeek === 6 || dayOfWeek === 0) { // Thứ 7 và Chủ nhật
+                normalPrice = 20000;
+                vipPrice = 40000;
+            } else {
+                normalPrice = 10000;
+                vipPrice = 20000;
+            }
+
+            normalPriceInput.value = normalPrice;
+            vipPriceInput.value = vipPrice;
+        }
+
+        dateInput.addEventListener('change', updateSeatPrices);
+        timeInput.addEventListener('change', updateSeatPrices);
+    });
+
+</script>
+<script src="/js/common_get_account.js"></script>
+<script src="/js/scheduleManagement.js"></script>
+<!-- Inject js-->
+</body>
+
+</html>

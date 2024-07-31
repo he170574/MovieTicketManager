@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>New Movie</title>
+    <!-- Required meta tags -->
+    <th:block th:replace="~{common/head :: headFragment}"></th:block>
+    <!-- Inject CSS -->
+    <link rel="stylesheet" href="/style/common.css">
+    <link rel="stylesheet" href="/style/newHome.css">
+
+    <!-- Thêm thư viện jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+<div th:replace="~{common/header :: headerFragment}"></div>
+<main>
+    <div class="hero-container position-relative">
+        <div class="image-container">
+            <img src="/img/den_1.jpg" class="hero-image">
+        </div>
+        <div class="overlay-text" id="overlay-text" data-id="1">
+            <h1></h1>
+            <p></p>
+            <a href="#" class="button" id="detailsButton" data-toggle="modal" data-target="#infoModal">Thông tin chi
+                tiết</a>
+        </div>
+        <div class="movie-list-container d-flex align-items-center justify-content-center position-absolute w-100 ">
+            <div class="movie-list d-flex flex-nowrap" id="movie-items"></div>
+        </div>
+    </div>
+</main>
+
+<div th:replace="~{common/footer :: footerFragment}"></div>
+<!-- Bootstrap JavaScript Libraries -->
+<th:block th:replace="~{common/scriptFile :: scriptFragment}"></th:block>
+<!-- Inject js-->
+<script src="/js/common_customer_page.js"></script>
+<script src="/js/newHome.js"></script>
+
+<!-- Modal for displaying movie details -->
+<!-- Modal -->
+<div class="modal modal-dialog-scrollable fade" id="select-movie" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content" style=" font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+            <div class="modal-header d-flex justify-content-center header-login bg-dark p-3"
+                 style="border-top-right-radius: 6px;border-top-left-radius: 6px;">
+                <img src="/img/logoNew.png" style="width: 150px; margin: auto" alt="">
+            </div>
+
+            <div class="modal-body body-login p-4 d-flex flex-column content-detail">
+                <div class="row">
+                    <div class="px-4 mb-3 col-3">
+                        <div class="d-flex justify-content-between my-2 flex-column align-items-center">
+                            <img id="movie-image" src="" style="width: 90%"/>
+                        </div>
+                    </div>
+                    <div class="px-4 mb-3 col-9">
+                        <span class="fw-bold mt-3 text-danger rounded h1" id="movie-name"
+                              style="background-color: rgba(255, 255, 255, 0.5)"></span>
+                        <p class="fw-bold mt-3 text-danger rounded h1" id="duration"
+                           style="background-color: rgba(255, 255, 255, 0.5)"></p>
+                        <p class="fw-bold mt-3 text-danger rounded h1" id="actor"
+                           style="background-color: rgba(255, 255, 255, 0.5)"></p>
+                        <p class="fw-bold mt-3 text-danger rounded h1" id="director"
+                           style="background-color: rgba(255, 255, 255, 0.5)"></p>
+                        <h4 class="fw-bold mt-2 text-danger-emphasis rounded" id="movie-content"
+                            style="background-color: rgba(255, 255, 255, 0.5)"></h4>
+                        <a class="btn btn-success mt-5" href="" id="buy-ticket">Buy Ticket</a>
+                        <a class="btn btn-success mt-5" href="" id="movie-rating">Rating</a>
+                    </div>
+                </div>
+
+                <div class="px-3 mb-3 row">
+                    <iframe id="trailer" class="col-12" width="560" height="315" src="" title="YouTube video player"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen></iframe>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Sửa đoạn mã JavaScript -->
+<script>
+    window.onload = function () {
+        $('#registerModal').on('hidden.bs.modal', function () {
+            $('.modal-backdrop').remove(); // Loại bỏ lớp modal-backdrop khi modal đăng ký đóng lại
+        });
+    };
+</script>
+</body>
+
+</html>

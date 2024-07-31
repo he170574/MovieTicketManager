@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <title>Statistic</title>
+    <!-- Required meta tags -->
+    <th:block th:replace="~{common/head :: headFragment}"></th:block>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!--  Inject CSS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+    <link rel="stylesheet" href="/style/common_manager.css">
+    <link rel="stylesheet" href="/style/admin.css">
+    <link rel="stylesheet" href="/style/showtime.css">
+    <link rel="stylesheet" href="/style/scheduleManagement.css">
+    <link rel="stylesheet" href="/style/adminMovieList.css">
+    <style>
+        .checkbox-wrapper-10 .tgl {
+            display: none;
+        }
+
+        .checkbox-wrapper-10 .tgl,
+        .checkbox-wrapper-10 .tgl:after,
+        .checkbox-wrapper-10 .tgl:before,
+        .checkbox-wrapper-10 .tgl *,
+        .checkbox-wrapper-10 .tgl *:after,
+        .checkbox-wrapper-10 .tgl *:before,
+        .checkbox-wrapper-10 .tgl + .tgl-btn {
+            box-sizing: border-box;
+        }
+
+        .checkbox-wrapper-10 .tgl::-moz-selection,
+        .checkbox-wrapper-10 .tgl:after::-moz-selection,
+        .checkbox-wrapper-10 .tgl:before::-moz-selection,
+        .checkbox-wrapper-10 .tgl *::-moz-selection,
+        .checkbox-wrapper-10 .tgl *:after::-moz-selection,
+        .checkbox-wrapper-10 .tgl *:before::-moz-selection,
+        .checkbox-wrapper-10 .tgl + .tgl-btn::-moz-selection,
+        .checkbox-wrapper-10 .tgl::selection,
+        .checkbox-wrapper-10 .tgl:after::selection,
+        .checkbox-wrapper-10 .tgl:before::selection,
+        .checkbox-wrapper-10 .tgl *::selection,
+        .checkbox-wrapper-10 .tgl *:after::selection,
+        .checkbox-wrapper-10 .tgl *:before::selection,
+        .checkbox-wrapper-10 .tgl + .tgl-btn::selection {
+            background: none;
+        }
+
+        .checkbox-wrapper-10 .tgl + .tgl-btn {
+            outline: 0;
+            display: block;
+            width: 4em;
+            height: 2em;
+            position: relative;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .checkbox-wrapper-10 .tgl + .tgl-btn:after,
+        .checkbox-wrapper-10 .tgl + .tgl-btn:before {
+            position: relative;
+            display: block;
+            content: "";
+            width: 50%;
+            height: 100%;
+        }
+
+        .checkbox-wrapper-10 .tgl + .tgl-btn:after {
+            left: 0;
+        }
+
+        .checkbox-wrapper-10 .tgl + .tgl-btn:before {
+            display: none;
+        }
+
+        .checkbox-wrapper-10 .tgl:checked + .tgl-btn:after {
+            left: 50%;
+        }
+
+        .checkbox-wrapper-10 .tgl-flip + .tgl-btn {
+            padding: 2px;
+            transition: all 0.2s ease;
+            font-family: sans-serif;
+            perspective: 100px;
+        }
+
+        .checkbox-wrapper-10 .tgl-flip + .tgl-btn:after,
+        .checkbox-wrapper-10 .tgl-flip + .tgl-btn:before {
+            display: inline-block;
+            transition: all 0.4s ease;
+            width: 155%;
+            text-align: center;
+            position: absolute;
+            line-height: 2em;
+            font-weight: bold;
+            color: #fff;
+            position: absolute;
+            top: 0;
+            left: 0;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 4px;
+        }
+
+        .checkbox-wrapper-10 .tgl-flip + .tgl-btn:after {
+            content: attr(data-tg-on);
+            background: #02C66F;
+            transform: rotateY(-180deg);
+        }
+
+        .checkbox-wrapper-10 .tgl-flip + .tgl-btn:before {
+            background: #FF3A19;
+            content: attr(data-tg-off);
+        }
+
+        .checkbox-wrapper-10 .tgl-flip + .tgl-btn:active:before {
+            transform: rotateY(-20deg);
+        }
+
+        .checkbox-wrapper-10 .tgl-flip:checked + .tgl-btn:before {
+            transform: rotateY(180deg);
+        }
+
+        .checkbox-wrapper-10 .tgl-flip:checked + .tgl-btn:after {
+            transform: rotateY(0);
+            left: 0;
+            background: #7FC6A6;
+        }
+
+        .checkbox-wrapper-10 .tgl-flip:checked + .tgl-btn:active:after {
+            transform: rotateY(20deg);
+        }
+    </style>
+
+</head>
+
+<body>
+
+<div class="container-custom">
+    <div th:replace="~{common/sideBar :: sideBarFragment }"></div>
+    <div class="tab-content">
+        <div class="header">
+
+            <div>
+                <i class="fa fa-bar-chart" aria-hidden="true"></i>
+                <h1>Statistic</h1>
+            </div>
+        </div>
+        <div class="main-content container-fluid p-5">
+            <div class="d-flex">
+                <input type="date" class="form-control" id="from">
+                <input type="date" class="form-control" id="to">
+                <button onclick="showChart()" class="btn btn-dark">Submit</button>
+            </div>
+            <div id="totalTicketsSold" class="ml-3" style="padding: 5px;">
+                Total Tickets Sold: <span id="totalTickets">Loading...</span>
+            </div>
+            <canvas id="ticketsChart" width="400" height="200"></canvas>
+        </div>
+
+    </div>
+</div>
+
+<!-- Bootstrap JavaScript Libraries -->
+<th:block th:replace="~{common/scriptFile :: scriptFragment}"></th:block>
+<!-- Inject js-->
+<script src="/js/common_get_account.js"></script>
+<!-- Inject js-->
+<script src="/js/addressConfig.js"></script>
+<script src="/js/statistic.js"></script>
+
+</body>
+</html>

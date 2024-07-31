@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>List Movie</title>
+    <!-- Required meta tags -->
+    <th:block th:replace="~{common/head :: headFragment}"></th:block>
+    <!--  Inject CSS -->
+    <link rel="stylesheet" href="/style/common_manager.css">
+    <link rel="stylesheet" href="/style/cm.css">
+</head>
+<body class="galaxy-theme">
+
+
+<div class="container-custom">
+    <div th:replace="~{common/sideBar :: sideBarFragment }"></div>
+
+
+    <div class="tab-content">
+        <div class="header">
+            <div>
+                <i class="fa fa-bar-chart" aria-hidden="true"></i>
+                <h1>Movie List</h1>
+            </div>
+        </div>
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <div class="card">
+                        <img src="/img/Movie/product_1.jpg" class="card-img-top rounded-3"
+                             alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title product-title">
+                                <a class="text-dark-emphasis text-decoration-none">
+                                    <span>Aquaman</span>
+                                </a>
+                            </h5>
+                            <h5 class="product-price text-dark-emphasis"><span>175.000</span><sup>đ</sup></h5>
+                            <p class="card-text text-body-secondary">Nhà vịt di cư là một bộ phim điện ảnh hoạt hình máy
+                                tính thuộc thể loại
+                                hài phiêu lưu của Mỹ.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-end">
+            <nav aria-label="...">
+                <ul class="pagination">
+                    <li class="page-item disabled">
+                        <span class="page-link">Previous</span>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item active">
+                                <span class="page-link">
+                                    2
+                                </span>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Next</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+</div>
+
+
+<!-- Bootstrap JavaScript Libraries -->
+<th:block  th:replace="~{common/scriptFile :: scriptFragment}"></th:block >
+<!-- Inject js-->
+<script src="/js/common_get_account.js"></script>
+<!-- Inject js-->
+</body>
+</html>

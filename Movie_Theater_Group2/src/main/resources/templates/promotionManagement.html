@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>PROMOTION MANAGEMENT</title>
+    <th:block th:replace="~{common/head :: headFragment}"></th:block>
+    <link rel="stylesheet" href="/style/common_manager.css">
+    <link rel="stylesheet" href="/style/confirmTicket.css">
+    <style>
+        #titleFilter {
+            width: 200px;
+        }
+
+        .add-new-promotion {
+            width: 150px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container-custom">
+    <div th:replace="~{common/sideBar :: sideBarFragment }"></div>
+    <div class="tab-content">
+        <div class="header">
+            <div>
+                <i class="fa fa-bar-chart" aria-hidden="true"></i>
+                <h1>PROMOTION MANAGEMENT</h1>
+            </div>
+        </div>
+        <div class="main-content container p-5">
+            <div class="d-flex justify-content-between mb-3">
+                <!-- Remove Start Time Filter and add Title Filter -->
+                <input type="text" id="titleFilter" class="form-control" placeholder="Title">
+                <button type="button" class="btn btn-primary add-new-promotion" data-bs-toggle="modal"
+                        data-bs-target="#modalAddPromotion">Add
+                </button>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Discount (%)</th>
+                    <th>Detail</th>
+                    <th>Code</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- Rows will be dynamically populated by renderPromotions() function -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!--Promotion Adding Modal-->
+<div class="modal fade" id="modalAddPromotion" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="col-12 d-flex justify-content-center mt-3">
+                    <h2 class="d-inline-block" id="staticBackdropLabel">Add New Promotion</h2>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="row m-3 bg-body-secondary d-flex justify-content-around">
+                    <div class="col-12 mt-3 mb-3">
+                        <form id="form-add-promotion">
+                            <div class="row border-top border-dark-subtle m-2 form-group">
+                                <label for="inputTitle" class="text-end col-sm-3 col-form-label"><b>Title:</b></label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="inputTitle">
+                                    <span class="form-message"></span>
+                                </div>
+                            </div>
+                            <div class="row border-top border-dark-subtle m-2 form-group">
+                                <label for="inputStartTime" class="text-end col-sm-3 col-form-label"><b>Start time:</b></label>
+                                <div class="col-sm-9">
+                                    <input type="datetime-local" class="form-control" id="inputStartTime">
+                                    <span class="form-message"></span>
+                                </div>
+                            </div>
+                            <div class="row border-top border-dark-subtle m-2 form-group">
+                                <label for="inputEndTime" class="text-end col-sm-3 col-form-label"><b>End
+                                    time:</b></label>
+                                <div class="col-sm-9">
+                                    <input type="datetime-local" class="form-control" id="inputEndTime">
+                                    <span class="form-message"></span>
+                                </div>
+                            </div>
+                            <div class="row border-top border-dark-subtle m-2 form-group">
+                                <label for="inputDiscountLevel" class="text-end col-sm-3 col-form-label"><b>Discount
+                                    (%):</b></label>
+                                <div class="col-sm-9">
+                                    <input type="number" class="form-control" id="inputDiscountLevel" max="100">
+                                    <span class="form-message"></span>
+                                </div>
+                            </div>
+                            <div class="row border-top border-dark-subtle m-2 form-group">
+                                <label for="inputDetails"
+                                       class="text-end col-sm-3 col-form-label"><b>Detail:</b></label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="inputDetails">
+                                    <input type="hidden" id="inputId">
+                                    <span class="form-message"></span>
+                                </div>
+                            </div>
+                            <div class="row border-top border-dark-subtle m-2 form-group">
+                                <label for="inputCode" class="text-end col-sm-3 col-form-label"><b>CODE:</b></label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="inputCode">
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-center mt-3">
+                                <button type="button" class="btn btn-secondary me-4" data-bs-dismiss="modal">Close
+                                </button>
+                                <button type="button" class="btn btn-danger" id="save-promotion">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+<th:block th:replace="~{common/scriptFile :: scriptFragment}"></th:block>
+<script src="/js/common_get_account.js"></script>
+<script th:src="@{/js/validate.js}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        Validator({
+            form: '#form-add-promotion',
+            errorSelector: '.form-message',
+            invalidClass: 'invalid',
+            rules: [
+                Validator.isRequired('#inputTitle'),
+                Validator.isRequired('#inputStartTime'),
+                Validator.isRequired('#inputEndTime'),
+                Validator.isRequired('#inputDiscountLevel'),
+                Validator.isRequired('#inputDetails'),
+            ]
+        });
+    });
+</script>
+<script src="/js/promotionManagement.js"></script>
+</body>
+
+</html>

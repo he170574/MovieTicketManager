@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Food Management</title>
+    <!-- Required meta tags -->
+    <th:block th:replace="~{common/head :: headFragment}"></th:block>
+
+    <!--  Inject CSS -->
+    <link rel="stylesheet" href="/style/common_manager.css">
+    <link rel="stylesheet" href="/style/admin.css">
+</head>
+
+<body>
+<div class="container-custom">
+    <div th:replace="~{common/sideBar :: sideBarFragment }"></div>
+    <div class="tab-content">
+        <div class="header">
+            <div>
+                <i class="bi bi-cup-straw"></i>
+                <h1>Food Management</h1>
+            </div>
+        </div>
+
+        <div class="main-content container-fluid p-5 ">
+            <!-- <button type="button" class="btn btn-primary mb-3" id="showFormBtn" onclick="toggleForm()">
+                <i class="bi bi-plus-circle"></i>
+                Add new
+            </button> -->
+            <div class="d-flex justify-content-between">
+                <div class="d-flex">
+
+                    <select class="form-select ps-3 w-auto me-1" id="pageSize">
+                        <option selected disabled>Select Page Size</option>
+                        <option value="10">-- 10 Rows --</option>
+                        <option value="20">-- 20 Rows --</option>
+                        <option value="30">-- 30 Rows --</option>
+                    </select>
+
+                    <span class="btn btn-dark" id="addNew" data-id="1" style="color: white"
+                          data-bs-target="#food-form" data-bs-toggle="modal">
+                        <i class="bi bi-plus-circle"></i>
+                        Add new </span>
+                </div>
+
+
+                <form class="d-flex justify-content-end" role="search">
+                    <button class="btn btn-dark me-1" type="button" id="search">Search</button>
+                    <input class="form-control border-dark" type="search" aria-label="Search" id="search-value"
+                           style="width: 100%;" placeholder="Enter Food Name...">
+                </form>
+            </div>
+
+
+            <!-- product -->
+            <div class="mt-3 mb-3 row flex-wrap" id="all-product">
+                <div class="col-lg-4 col-6 p-3">
+                    <div class="card rounded  bg-dark" style="width: 100%;overflow: hidden">
+                        <img src="/img/Movie/product_1.jpg" class="rounded movie-small-img bg-dark" style="width: 100%;"
+                             alt="">
+                        <div class="card-body border-0 text-light px-4 bg-dark">
+                            <h3 class="card-title  fw-bold movie-name">À Há MAN</h3>
+                            <p class="card-text pt-2">
+                                Type:
+                                <span class="fw-bold movie-type">Hài Viễn Tưởng</span>
+                            </p>
+                            <div class="d-flex justify-content-between">
+                                <p class="card-text pt-2 col me-3">
+                                    Size:
+                                    <span class="fw-bold movie-type">XL</span>
+                                </p>
+                                <p class="card-text pt-2 col">
+                                    Price:
+                                    <span class="fw-bold movie-type">1</span>
+                                </p>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <button class="btn btn-success col  me-3">Update</button>
+                                <button class="btn btn-danger col">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end users -->
+
+
+            <div class="d-flex justify-content-end">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <li class="page-item"><span class="page-link">Previous</span></li>
+                        <li class="page-item"><span class="page-link active">1</span></li>
+                        <li class="page-item"><span class="page-link">Next</span></li>
+                    </ul>
+                </nav>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Modal   -->
+<div class="modal fade" id="food-form" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content" style=" font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+
+            <div class="modal-header d-flex justify-content-center header-login bg-dark p-3"
+                 style="border-top-right-radius: 6px;border-top-left-radius: 6px;">
+                <img src="/img/logo_img.png" style="width: 150px;" alt="">
+            </div>
+
+            <div class="modal-body body-login p-4">
+
+                <div class="px-5 mb-3">
+                    <div class="d-flex justify-content-center my-2">
+                        <h3 class="fw-bold" id="modal-head">Food Form</h3>
+                    </div>
+                </div>
+                <div id="form-register">
+                    <div class="row justify-content-around">
+                        <div class="form-group mb-3 col-6">
+                            <div class="d-flex justify-content-between">
+                                <label class="fw-semibold form-label" for="food-name">Food Name</label>
+                            </div>
+                            <input type="text" class="form-control border border-dark-subtle" id="food-name"
+                                   name="food-name" aria-describedby="emailHelp" placeholder="Food Name">
+                        </div>
+                        <div class="form-group mb-4 col-6">
+                            <div class="d-flex justify-content-between">
+                                <label class="fw-semibold form-label" for="food-price">Food Price</label>
+                            </div>
+                            <input type="number" class="form-control border border-dark-subtle" id="food-price"
+                                   placeholder="Food Price">
+                        </div>
+                    </div>
+                    <div class="row justify-content-around">
+                        <div class="form-group mb-3 col-6">
+                            <div class="d-flex justify-content-between">
+                                <label class="fw-semibold form-label" for="food-image">Food Image</label>
+                            </div>
+                            <input type="file" class="form-control border border-dark-subtle"
+                                   id="food-image" accept="image/*">
+                        </div>
+
+                        <div class="form-group mb-3 col-6">
+                            <div class="d-flex justify-content-between">
+                                <label class="fw-semibold form-label" for="food-size">Food Size</label>
+                                <!-- <a href="" style="font-size: 14px">Forgot</a> -->
+                            </div>
+                            <select class="form-select border border-dark-subtle"  id="food-size" aria-label="Default select example">
+                                <option selected disabled value="">Select Size...</option>
+                                <option value="XL">XL</option>
+                                <option value="L">L</option>
+                                <option value="M">M</option>
+                                <option value="S">S</option>
+                                <option value="null">No Size</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row justify-content-start mt-2">
+                        <div class="form-group mb-3 col-6 text-center">
+                            <img src="/img/food_img_default.jpg" alt="Food_Default_Imgage" class="w-75 rounded" id="preview-food-image"/>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-dark fw-semibold d-none" style="width: 100%;"
+                            id="submit-form">
+                        Create
+                    </button>
+                    <button type="button" class="btn btn-dark fw-semibold d-none" style="width: 100%;"
+                            id="submit-update-form">
+                        Update
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Bootstrap JavaScript Libraries -->
+<th:block th:replace="~{common/scriptFile :: scriptFragment}"></th:block>
+<!-- Inject js-->
+<script src="/js/common_get_account.js"></script>
+<!-- Inject js-->
+<script src="/js/foodManager.js"></script>
+</body>
+
+</html>

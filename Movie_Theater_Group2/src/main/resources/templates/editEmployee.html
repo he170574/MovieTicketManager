@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Edit Employee</title>
+    <!-- Required meta tags -->
+    <th:block th:replace="~{common/head :: headFragment}"></th:block>
+
+    <!--  Inject CSS -->
+    <link rel="stylesheet" href="/style/common_manager.css">
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 200px;
+        }
+
+        .file-input__input {
+            width: 0.1px;
+            height: 0.1px;
+            opacity: 0;
+            overflow: hidden;
+            position: absolute;
+            z-index: -1;
+        }
+
+        .file-input__label {
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #fff;
+            font-size: 14px;
+            padding: 10px 12px;
+            background-color: #ff0000;
+            box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25);
+        }
+
+        .file-input__label svg {
+            height: 16px;
+            margin-right: 4px;
+        }
+
+        .col-3,
+        .col-8 {
+            height: 95vh;
+            background: radial-gradient(circle at 24.1% 68.8%, rgb(50, 50, 50) 0%, rgb(0, 0, 0) 99.4%);
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+
+        .change-password {
+            border: 2px solid #ffffff;
+            border-radius: 10px;
+            box-shadow: 15px 15px 30px rgb(25, 25, 25),
+                -15px -15px 30px rgb(60, 60, 60);
+        }
+
+        
+    </style>
+</head>
+
+<body>
+    <div class="container-custom">
+        <div th:replace="~{common/sideBar :: sideBarFragment }"></div>
+        <div class="tab-content">
+            <div class="header">
+                <div>
+                    <i class="fa fa-bar-chart" aria-hidden="true"></i>
+                    <h1>Edit Employee</h1>
+                </div>
+            </div>
+            <div class="main-content container p-5">
+                <div class="row row-main justify-content-around">
+                    <div class="col-3 ms-4 text-center">
+                        <img src="img/user_img_defalut.png" alt="" width="80%" class="mt-5 mb-3">
+
+
+                        <div class="file-input">
+                            <input type="file" name="file-input" id="file-input" class="file-input__input" />
+                            <label class="file-input__label" for="file-input">
+                                <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="upload"
+                                    class="svg-inline--fa fa-upload fa-w-16" role="img"
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                    <path fill="currentColor"
+                                        d="M296 384h-80c-13.3 0-24-10.7-24-24V192h-87.7c-17.8 0-26.7-21.5-14.1-34.1L242.3 5.7c7.5-7.5 19.8-7.5 27.3 0l152.2 152.2c12.6 12.6 3.7 34.1-14.1 34.1H320v168c0 13.3-10.7 24-24 24zm216-8v112c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V376c0-13.3 10.7-24 24-24h136v8c0 30.9 25.1 56 56 56h80c30.9 0 56-25.1 56-56v-8h136c13.3 0 24 10.7 24 24zm-124 88c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20zm64 0c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20z">
+                                    </path>
+                                </svg>
+                                <span>Upload file</span></label>
+                        </div>
+                    </div>
+
+                    <div class="col-8 me-4">
+                        <form class="row g-3 text-light">
+                            <h3 class="text-center">Employee information</h3>
+                            <div class="col-md-6">
+                                <label for="account" class="form-label">Account: <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control persist-data" id="account" name="account"
+                                    placeholder="Account" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="email" class="form-label">Email: <span class="text-danger">*</span></label>
+                                <input type="email" class="form-control persist-data" id="email" name="email"
+                                    placeholder="Email" required>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label for="fullName" class="form-label">Full name: <span
+                                        class="text-danger">*</span></label>
+                                <input type="text" class="form-control persist-data" id="fullName" name="fullName"
+                                    placeholder="Full name" required>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label for="iCard" class="form-label">Identity card: <span
+                                        class="text-danger">*</span></label>
+                                <input type="text" class="form-control persist-data" id="iCard" name="iCard"
+                                    placeholder="Identity card" required>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label for="phoneNumber" class="form-label">Phone number: <span
+                                        class="text-danger">*</span></label>
+                                <input type="text" class="form-control persist-data" id="phoneNumber" name="phoneNumber"
+                                    placeholder="Phone number" required>
+                            </div>
+
+                            <div class="col-md-6 me-2">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Gender: <span class="text-danger">*</span></label> <br>
+
+                                        <input type="radio" id="male" name="gender" value="1" class="persist-data"
+                                            required>
+                                        <label for="male">Male</label>
+
+                                        <input type="radio" id="female" name="gender" class="persist-data" value="0">
+                                        <label for="female">Female</label>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="dob" class="form-label">Date of Birth: <span class="text-danger">*</span></label>
+                                        <input type="date" class="form-control persist-data" id="dob" name="dob"
+                                            placeholder="Address" required>
+                                    </div>
+
+                                    <div class="col-md-12 mb-3">
+                                        <label for="address" class="form-label">Address: <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" class="form-control persist-data" id="address" name="address"
+                                            placeholder="Address" required>
+                                    </div>
+
+                                    <div class="col-md-12 mb-3">
+                                        <button type="submit" class="btn text-light"
+                                            style="background-color: #ff0000;">Save</button>
+                                        <a href="employee.html" class="btn text-light"
+                                            style="background-color: #7b7c7c;">Back</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-5 change-password mt-4 ms-5">
+                                <div class="row mt-3">
+                                    <h3 class="text-center mb-3">Change password</h3>
+                                    <div class="col-12 mb-3">
+                                        <label for="oldPassword" class="form-label">Old password: <span
+                                                class="text-danger">*</span></label>
+                                        <input type="password" class="form-control persist-data" id="oldPassword"
+                                            name="oldPassword" placeholder="Old password" required>
+                                    </div>
+
+                                    <div class="col-12 mb-3">
+                                        <label for="newPassword" class="form-label">New password: <span
+                                                class="text-danger">*</span></label>
+                                        <input type="password" class="form-control persist-data" id="newPassword"
+                                            name="newPassword" placeholder="New password" required>
+                                    </div>
+
+                                    <div class="col-12 mb-3">
+                                        <label for="cfPassword" class="form-label">Confirm Password: <span
+                                                class="text-danger">*</span></label>
+                                        <input type="password" class="form-control persist-data" id="cfPassword"
+                                            name="cfPassword" placeholder="Confirm Password" required>
+                                    </div>
+
+                                    <div class="col-md-12 mb-3">
+                                        <button type="submit" class="btn text-light"
+                                            style="background-color: #ff0000;">Change</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap JavaScript Libraries -->
+    <th:block  th:replace="~{common/scriptFile :: scriptFragment}"></th:block >
+    <!-- Inject js-->
+    <script src="/js/common_get_account.js"></script>
+    <!-- Inject js-->
+</body>
+
+</html>

@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Movie Rating</title>
+    <th:block th:replace="~{common/head :: headFragment}"></th:block>
+    <link rel="stylesheet" href="/style/common_manager.css">
+    <link rel="stylesheet" href="/style/movieRating.css">
+</head>
+<body>
+<div th:replace="~{common/header :: headerFragment}"></div>
+<main>
+    <div id="app">
+    </div>
+</main>
+<th:block th:replace="~{common/scriptFile :: scriptFragment}"></th:block>
+<script type="module" src="/js/movieRating.js"></script>
+<!-- Inject js-->
+</body>
+</html>

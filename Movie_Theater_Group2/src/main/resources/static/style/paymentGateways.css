@@ -1,0 +1,154 @@
+.lable {
+    color: gray !important;
+    font-size: 15px;
+}
+
+.lable, p {
+    margin: 0;
+}
+
+.amount {
+    font-size: 24px;
+}
+
+.qr {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    width: 600px;
+    height: 600px;
+    border-radius: 15px;
+}
+
+.col-6 {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.time {
+    height: 50px;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+    color: #000;
+    border-radius: 5px;
+}
+
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+:root {
+    --backgound-dark-color-primary: black;
+    --text-color: white;
+}
+body {
+    font-family: "Montserrat", sans-serif;
+}
+/* Style Header */
+header {
+    height: 70px;
+}
+.navbar-custom {
+    position: fixed;
+    top: 0;
+    z-index: 10;
+    width: 100vw;
+    height: 70px;
+    background-color: var(--backgound-dark-color-primary);
+}
+/* .navbar .collapse .nav-item:not(.nav-item:last-child) .nav-link::after {
+  content: "";
+  display: inline-block;
+  width: 0.075rem;
+  height: 10px;
+  margin-left: 10px;
+  background-color: var(--text-color);
+} */
+.navbar .collapse .nav-item .nav-link {
+    font-size: 15px;
+    font-family: inherit;
+    font-weight: 600;
+    color: var(--text-color);
+    transition: all 0.3s;
+    display: inline-block;
+}
+.navbar .collapse .nav-item .nav-link:hover{
+    font-size: 20px;
+    color: #fe0000;
+}
+.navbar .collapse .nav-item .nav-link.active{
+    font-size: 20px;
+    color: #fe0000;
+}
+/* Main */
+
+/* Master Slide */
+.master-slide .carousel-item img{
+    height: 500px;
+    object-fit: cover;
+}
+/* Login */
+.modal-dialog-scrollable .modal-body::-webkit-scrollbar-track
+{
+    background-color: white;
+}
+
+.modal-dialog-scrollable .modal-body::-webkit-scrollbar
+{
+    width: 10px;
+    background-color: white;
+}
+
+.modal-dialog-scrollable .modal-body::-webkit-scrollbar-thumb
+{
+    border-radius: 10px;
+    background-color: #212529;
+    border: 2px solid white;
+}
+
+.form-check-input:checked {
+    background-color: #333;
+    border-color: #333;
+}
+.form-check-input:focus{
+
+    box-shadow: none;
+}
+/* Footer */
+footer {
+    background-color: var(--backgound-dark-color-primary);
+    color: var(--text-color);
+    padding: 5rem 5rem 2rem 5rem;
+    font-size: 14px;
+}
+footer i {
+    font-size: 16px;
+    margin-right: 10px;
+    color: #b49761;
+}
+.footer-link {
+
+}
+.footer-link ul {
+    list-style-type: none;
+    padding: 0;
+}
+.footer-link li{
+    padding-top: 10px;
+}
+
+.footer-social{
+    height: 200px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
